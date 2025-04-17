@@ -1,0 +1,155 @@
+Dataset: upr_paragraph_countries
+
+| Model                                  | Train/Test Samples | Rounds | Average Train Time (s) | Best Round Accuracy | Average Accuracy |
+|----------------------------------------|--------------------|--------|------------------------|---------------------|------------------|
+| qwen2.5-coder:14b (no code, new lines) | 43/174             | 3      | 16.59                  | 96.55               | 96.17            |
+| gemma3:12b (no code, new lines)        | 43/174             | 3      | 61.76                  | 95.98               | 95.98            |
+| qwen2.5-coder:14b (no code)            | 43/174             | 3      | 10.95                  | 95.98               | 95.21            |
+| phi4 (no code, new lines)              | 43/174             | 3      | 23.75                  | 96.55               | 94.64            |
+| phi4                                   | 43/174             | 3      | 102.05                 | 95.4                | 94.25            |
+| phi4 (new lines)                       | 43/174             | 3      | 170.32                 | 94.25               | 93.1             |
+| qwen2.5-coder:14b                      | 43/174             | 3      | 66.38                  | 93.1                | 92.91            |
+| qwen2.5-coder:14b (new lines)          | 43/174             | 3      | 119.04                 | 93.1                | 91.95            |
+| gemma3:12b                             | 43/174             | 3      | 700.07                 | 94.25               | 91.95            |
+| gemma3:12b (new lines)                 | 43/174             | 3      | 114.26                 | 91.38               | 90.42            |
+| phi4 (no code)                         | 43/174             | 3      | -                      | Failing             | Failing          |
+| gemma3:12b (no code)                   | 43/174             | 3      | -                      | Failing             | Failing          |
+
+
+---
+
+Dataset: upr_paragraph_numbers
+
+| Model                       | Train/Test Samples | Rounds | Average Train Time (s) | Best Round Accuracy | Average Accuracy |
+|-----------------------------|--------------------|--------|------------------------|---------------------|------------------|
+| qwen2.5-coder:14b           | 43/174             | 3      | 3.56                   | 100                 | 100              |
+| gemma3:12b                  | 43/174             | 3      | 4.11                   | 100                 | 100              |
+| qwen2.5-coder:14b (no code) | 43/174             | 3      | 6.94                   | 100                 | 100              |
+| gemma3:12b (no code)        | 43/174             | 3      | 8.13                   | 100                 | 100              |
+| phi4                        | 43/174             | 3      | 13.53                  | 100                 | 100              |
+| phi4 (no code)              | 43/174             | 3      | 8.01                   | 98.85               | 98.66            |
+
+
+---
+
+Dataset: upr_paragraph_text
+
+| Model                       | Train/Test Samples | Rounds | Average Train Time (s) | Best Round Accuracy | Average Accuracy |
+|-----------------------------|--------------------|--------|------------------------|---------------------|------------------|
+| qwen2.5-coder:14b (no code) | 43/174             | 3      | 20.54                  | 98.28               | 97.89            |
+| qwen2.5-coder:14b           | 43/174             | 3      | 7.57                   | 95.98               | 95.98            |
+| phi4                        | 43/174             | 3      | 42.8                   | 94.25               | 94.25            |
+| phi4 (no code)              | 43/174             | 3      | 192.79                 | 92.53               | 90.04            |
+| gemma3:12b (no code)        | 43/174             | 3      | 162.46                 | 94.83               | 90.04            |
+| gemma3:12b                  | 43/174             | 3      | 73.97                  | 94.25               | 62.83            |
+
+
+---
+
+Dataset: rightstaging_agenda_item
+
+| Model             | Train/Test Samples | Rounds | Average Train Time (s) | Best Round Accuracy | Average Accuracy |
+|-------------------|--------------------|--------|------------------------|---------------------|------------------|
+| qwen2.5-coder:14b | 40/160             | 3      | 3.97                   | 100                 | 100              |
+| phi4              | 40/160             | 3      | 15.77                  | 100                 | 99.79            |
+| gemma3:12b        | 40/160             | 3      | 94.83                  | 100                 | 77.5             |
+
+
+---
+
+Dataset: rightstaging_symbol
+
+| Model             | Train/Test Samples | Rounds | Average Train Time (s) | Best Round Accuracy | Average Accuracy |
+|-------------------|--------------------|--------|------------------------|---------------------|------------------|
+| gemma3:12b        | 40/160             | 3      | 11.99                  | 96.88               | 96.88            |
+| phi4              | 40/160             | 3      | 33.24                  | 96.88               | 96.46            |
+| qwen2.5-coder:14b | 40/160             | 3      | 14.98                  | 95.62               | 95.21            |
+
+
+---
+
+Dataset: rightstaging_title
+
+| Model                       | Train/Test Samples | Rounds | Average Train Time (s) | Best Round Accuracy | Average Accuracy |
+|-----------------------------|--------------------|--------|------------------------|---------------------|------------------|
+| gemma3:12b (no code)        | 40/160             | 3      | 285                    | 80                  | 78.75            |
+| qwen2.5-coder:14b (no code) | 40/160             | 3      | 371.07                 | 74.38               | 72.29            |
+| phi4 (no code)              | 40/160             | 3      | 396.19                 | 70.62               | 69.37            |
+
+---
+
+
+- qwen2.5-coder:14b model is the better option most of the time, it's more consistent than the others.
+- The models create different answers on each run, even though I use the same seed to split the data.
+- In addition to above models, I have also tried models like deepcoder:14b, deepseek-coder:6.7b or like exaone-deep but they get stuck a lot or they do not perform well at all.
+So I have only included the best 3 models to not complicate the results.
+- When the labels are multi option (i.e. the output is a list of strings), and when I try to get the answers directly from the model, 
+only the qwen2.5-coder:14b model is able to return the output in the correct format. Other models sometimes are not able to create a list of strings properly.
+- To solve the above issue with the multi option labels, I have also tried to get the answers each label in a new line, instead of a list of strings, and it improved the results.
+- Performance in "rightstagint_task" looks like a bit lower than the other tasks but actually they are not that bad as they seem.
+The models just add some simple stuff - a few words from the following segment or something, but it's not that critical.
+
+
+PROMPT:
+
+
+    def get_prompt(examples: list[LabeledDataSample]):
+        options = json.loads(Path(ROOT_PATH, "data/upr/upr_paragraph_countries/options.json").read_text())
+        options_string = ",\n".join([o for o in options])
+    
+        examples_string = "**Examples**\n"
+        for sample_index, sample in enumerate(examples):
+            examples_string += f"**Example {sample_index+1}**\n"
+            examples_string += "Input:\n"
+            examples_string += f'"{sample.text}"\n\n'
+            examples_string += "Output:\n"
+            examples_string += f"{sample.label}\n\n"
+    
+        prompt = f"""**Task**  
+    We have a set of example inputs and the corresponding outputs. These examples illustrate how we want to transform the input data to the output data. Your goal is to figure out the pattern or logic from these examples and write a self-contained Python function that reproduces this behavior.
+    
+    We do not provide an explicit list of rules. Instead, use the examples to infer how the input should be processed to create the output. If the pattern does not clearly match some new input, your function may return `None` or an empty string, but it should handle the provided examples correctly.  
+    
+    {examples_string}
+    
+    **Requirements**  
+    1. Write your solution as a single Python function named `extract(text: str)`. No additional arguments should be required.  
+       2. In your solution, you may apply any logic needed to extract, parse, or process the input so that it matches how each example is transformed to its output.  
+       3. If no valid transformation or pattern is found, return `None` or an empty string.  
+       4. Only return your function definition. No additional commentary, test calls, or example usage should appear outside the code block.  
+       5. Your code should be standalone and use only standard Python 3 libraries without external dependencies.
+    
+    
+    **Output Selection**
+    
+    The code can *only* return elements from the following list and every element can be selected *only* once:
+    
+    [
+        {options_string}
+    ]
+    
+    
+    **Output Format**  
+    Return the function definition *only*, wrapped in fenced code blocks using Python syntax. For example:
+    
+    ```python
+    def extract(text: str):
+        # Your logic here
+    ```
+    
+    No explanatory text or test calls should appear outside of that code block."""
+    
+        return prompt
+
+
+To get the every prediction in new line:
+
+        examples_string = "**Examples**\n"
+    for sample_index, sample in enumerate(examples):
+        examples_string += f"**Example {sample_index+1}**\n"
+        examples_string += "Input:\n"
+        examples_string += f'"{sample.text}"\n\n'
+        examples_string += "Output:\n"
+        for country in sample.label:
+            examples_string += f"{country}\n"
+        examples_string += "\n\n"
