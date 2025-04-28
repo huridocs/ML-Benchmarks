@@ -160,7 +160,7 @@ So I have only included the best 3 models to not complicate the results.
 - When the labels are multi option (i.e. the output is a list of strings), and when I try to get the answers directly from the model, 
 only the qwen2.5-coder:14b model is able to return the output in the correct format. Other models sometimes are not able to create a list of strings properly.
 - To solve the above issue with the multi option labels, I have also tried to get the answers each label in a new line, instead of a list of strings, and it improved the results.
-- Performance in "rightstagint_task" looks like a bit lower than the other tasks but actually they are not that bad as they seem.
+- Performance in "rightstaging_title" looks like a bit lower than the other tasks but actually they are not that bad as they seem.
 The models just add some simple stuff - a few words from the following segment or something, but it's not that critical.
 
 
