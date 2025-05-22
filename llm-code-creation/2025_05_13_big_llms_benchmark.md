@@ -1,4 +1,85 @@
 
+Dataset: rightstaging_agenda_item
+
+| Model                                  | Train/Test Samples | Train Rounds | Average Train Accuracy | Test Set Accuracy | Average Time per Request (s) |
+|----------------------------------------|--------------------|--------------|------------------------|-------------------|------------------------------|
+| qwen-235b-a22b                         | 437/1749           | 5            | 97.25                  | 100               |                              |
+| claude sonnet 3.7                      | 437/1749           | 6            | 97.25                  | 99.94             |                              |
+| chatgpt-4.1                            | 437/1749           | 6            | 97.56                  | 99.89             |                              |
+| gemini2.5-pro                          | 437/1749           | 7            | 97.61                  | 99.66             |                              |
+| llama4-maverick                        | 437/1749           | 10           | 89.56                  | 99.14             |                              |
+| grok3                                  | 437/1749           | 10           | 96.06                  | 99.09             |                              |
+| gemini2.5-flash                        | 437/1749           | 10           | 85.4                   | 99.09             |                              |
+| deepseek-v3.1                          | 437/1749           | 10           | 90.98                  | 98.86             |                              |
+| llama3.3 (70b)                         | 437/1749           | 10           | 88.65                  | 98.17             | 102                          |
+| devstral:24b                           | 437/1749           | 10           | 83.02                  | 98.17             | 9                            |
+| gemma:27b                              | 437/1749           | 10           | 61.62                  | 85.02             | 20.7                         |
+
+I also tried llama4:scout but was not able to get a response. It gave this error:
+Error: POST predict: Post "http://127.0.0.1:36271/completion": EOF
+
+
+Dataset: upr_paragraph_countries
+
+| Model                                  | Train/Test Samples | Train Rounds          | Average Train Accuracy | Test Set Accuracy |
+|----------------------------------------|--------------------|-----------------------|------------------------|-------------------|
+| claude sonnet 3.7                      | 43/174             | 4                     | 97.75                  | 96.55             |
+| chatgpt-4.1                            | 43/174             | 5                     | 96.2                   | 95.98             |
+| gemini2.5-pro                          | 43/174             | 4                     | 96.51                  | 93.68             |
+| llama4-maverick                        | 43/174             | 4                     | 96.51                  | 93.68             |
+| gemini2.5-flash                        | 43/174             | 4                     | 95.34                  | 93.68             |
+| deepseek-v3.1                          | 43/174             | 5                     | 77.21                  | 93.68             |
+| grok3                                  | 43/174             | 5                     | 95.8                   | 91.95             |
+| qwen-235b-a22b                         | 43/174             | 6 (stopped manually)  | 31.4                   | 91.38             |
+
+
+Dataset: upr_paragraph_numbers
+
+| Model                                  | Train/Test Samples | Train Rounds | Average Train Accuracy | Test Set Accuracy |
+|----------------------------------------|--------------------|--------------|------------------------|-------------------|
+| chatgpt-4.1                            | 43/174             | 1            | 100                    | 100               |
+| claude sonnet 3.7                      | 43/174             | 1            | 100                    | 100               |
+| deepseek-v3.1                          | 43/174             | 1            | 100                    | 100               |
+| gemini2.5-flash                        | 43/174             | 1            | 100                    | 100               |
+| gemini2.5-pro                          | 43/174             | 1            | 100                    | 100               |
+| grok3                                  | 43/174             | 1            | 100                    | 100               |
+| llama4-maverick                        | 43/174             | 1            | 100                    | 100               |
+| qwen-235b-a22b                         | 43/174             | 1            | 100                    | 100               |
+
+
+Dataset: upr_paragraph_text
+
+| Model                                  | Train/Test Samples | Train Rounds         | Average Train Accuracy | Test Set Accuracy |
+|----------------------------------------|--------------------|----------------------|------------------------|-------------------|
+| claude sonnet 3.7                      | 43/174             | 2                    | 98.84                  | 100               |
+| chatgpt-4.1                            | 43/174             | 3                    | 97.67                  | 100               |
+| gemini2.5-pro                          | 43/174             | 3                    | 97.67                  | 100               |
+| grok3                                  | 43/174             | 5                    | 97.67                  | 100               |
+| qwen-235b-a22b                         | 43/174             | 2                    | 98.84                  | 98.85             |
+| deepseek-v3.1                          | 43/174             | 5                    | 92.56                  | 98.85             |
+| llama4-maverick                        | 43/174             | 9 (stopped manually) | 21.7                   | 97.7              |
+| gemini2.5-flash                        | 43/174             | 7 (stopped manually) | 67.77                  | 97.13             |
+
+
+
+Dataset: vote_abstaining_english
+(since there are very little data, I passed all the training samples at the same time)
+
+| Model                                  | Train/Test Samples | Train Rounds         | Average Train Accuracy | Test Set Accuracy |
+|----------------------------------------|--------------------|----------------------|------------------------|-------------------|
+| chatgpt-4.1                            | 3/12               | 1                    | 100                    | 83.33             |
+| claude sonnet 3.7                      | 3/12               | 1                    | 100                    | 83.33             |
+| gemini2.5-flash                        | 3/12               | 1                    | 100                    | 83.33             |
+| gemini2.5-pro                          | 3/12               | 1                    | 100                    | 83.33             |
+| grok3                                  | 3/12               | 1                    | 100                    | 83.33             |
+| deepseek-v3.1                          | 3/12               | 1                    | 66.67                  | 41.67             |
+| qwen-235b-a22b                         | 3/12               | 1                    | 66.67                  | 0                 |
+| llama4-maverick                        | 3/12               | 1                    | 33.33                  | 0                 |
+
+
+
+
+
 | Model                |  Context Window     |
 |----------------------|---------------------|
 | ChatGPT 4.1          | 1M tokens           |
@@ -12,14 +93,14 @@
 
 
 
-| Task                     | Train/Test Size |
-|--------------------------|-----------------|
-| upr_paragraph_countries  | 3/19            |
-| upr_paragraph_text       | 3/15            |
-| rightstaging_symbol      | 3/15            |
-| rightstaging_title       | 3/15            |
-| vote_against_english     | 3/12            |
-| vote_abstaining_english  | 3/12            |
+| Task                              | Train/Test Size |
+|-----------------------------------|-----------------|
+| upr_paragraph_countries (no code) | 3/19            |
+| upr_paragraph_text      (no code) | 3/15            |
+| rightstaging_symbol     (no code) | 3/15            |
+| rightstaging_title      (no code) | 3/15            |
+| vote_against_english    (no code) | 3/12            |
+| vote_abstaining_english (no code) | 3/12            |
 ---
 - I have tried these models:
     - ChatGPT 4.1
