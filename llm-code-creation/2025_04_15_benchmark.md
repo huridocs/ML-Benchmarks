@@ -207,7 +207,7 @@ only the qwen2.5-coder:14b model is able to return the output in the correct for
 The models just add some simple stuff - a few words from the following segment or something, but it's not that critical.
 
 
-PROMPT:
+CODE PROMPT:
 
 
     def get_prompt(examples: list[LabeledDataSample]):
@@ -331,3 +331,25 @@ To get the every prediction in new line:
         for country in sample.label:
             examples_string += f"{country}\n"
         examples_string += "\n\n"
+
+
+
+Get mistake indexes:
+
+    def get_mistake_indexes(expected_output: list[str], actual_output: list[str], visualize: bool = True):
+        mistake_indexes = []
+        result_string = ""
+
+        for i in range(len(expected_output)):
+            if expected_output[i] == actual_output[i]:
+                result_string += '\033[94m"' + str(expected_output[i]) + '", \033[0m'
+            else:
+                mistake_indexes.append(i)
+                result_string += (
+                    "\033[91m" + str(actual_output[i]) + "\033[0m" + f"\033[93m{str(expected_output[i])}, \033[0m" + "\033[0m"
+                )
+
+        if visualize:
+            print(f"Result:\n{result_string}\n")
+
+        return mistake_indexes
