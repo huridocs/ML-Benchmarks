@@ -1,3 +1,6 @@
+dataset: upr_action (5 labels, single label classification)
+model: claude sonnet 3.7
+
 |               Method              | Train/Test Samples | Train Rounds | Average Train Accuracy | Test Set Accuracy |
 |-----------------------------------|--------------------|--------------|------------------------|-------------------|
 |        contrastive_learning       |     19801/79203    |       6      |          53.28         |       70.25       |
@@ -17,3 +20,37 @@
 |        constraints_no_loops       |     19801/79203    |       5      |          36.44         |        42.9       |
 |          chain_of_thought         |     19801/79203    |       2      |          31.8          |       38.47       |
 |             same_chat             |     19801/79203    |       3      |          26.38         |       27.07       |
+
+
+- [x] Chain of thought prompting:
+    "Before writing the function, carefully think and reason step by step about how to solve the classification task based on the examples. However, only output the final function definition, wrapped in a Python code block, with no explanations or commentary."
+- [x] Try to add constraints in prompt:
+    - [x] No regular expressions
+    - [x] Use dictionaries for mapping
+    - [x] Use only if/else
+    - [x] No loops
+    - [x] Substring matching only (Only use substring matching (e.g., `in` operator) to determine topic assignments. Do not use full-word or token-based matching.)
+
+- [x] Try scoring system:
+    "Implement a scoring system in your function. For each topic label, assign a score based on how well the input text matches that topic, using any logic you infer from the examples. After scoring all labels, select the label with the highest score. If no label has a positive score, return an empty list."
+
+- [x] Special instructions:
+    - [x] "Write the function as if you were a linguist, focusing on subtle language cues." (logs_special_instructions_linguist.md)
+    - [x] "Imagine you are a data scientist optimizing for maximum accuracy, even if the code is complex." (logs_special_instructions_data_scientist.md)
+    - [x] "Write the function as if you were preparing it for a production system where robustness is critical." (logs_special_instructions_robustness.md)
+    - [x] "Write the function as if you are teaching a beginner, prioritizing clarity and simplicity." (logs_special_instructions_simplicity.md)
+
+- [x] Try to use the same chat.
+
+- [x] Self consistency/reflection: Ask the LLM to double-check its own logic:
+    "First, write your function as usual. Then, review your function and describe any potential weaknesses, edge cases, or improvements. If you find any issues, revise your function accordingly.  
+**Important:** Only output the final, revised function definition, wrapped in a Python code block, with no explanations or commentary outside the code block."
+
+- [x] Reverse engineering:
+    "You are only given the input texts and their assigned topic labels, but not the explicit rules. Your task is to reverse engineer the possible logic that could have produced these labels, and write a function that mimics this logic as closely as possible."
+
+- [x] Multi Stage Filtering:
+    "Write your function in two stages: first, filter out any topics that are clearly irrelevant to the input text; then, from the remaining topics, select the most appropriate one using more detailed logic."
+
+- [x] Contrastive Learning:
+    "Compare the input text to all provided examples. Assign the label whose example is most similar in both intent and specificity."
