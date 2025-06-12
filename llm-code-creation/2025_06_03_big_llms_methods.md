@@ -9,8 +9,10 @@ model: claude sonnet 3.7
 |   constraints_dictionary_mapping  |     19801/79203    |       5      |          41.94         |       68.32       |
 |           default prompt          |     19801/79203    |      10      |          51.0          |       67.74       |
 |   special_instructions_linguist   |     19801/79203    |       7      |          50.17         |       65.66       |
+| special_instructions_no_words_len |     19801/79203    |       7      |          56.59         |       65.55       |
 |  special_instructions_robustness  |     19801/79203    |       4      |          49.73         |        65.1       |
 |  special_instructions_simplicity  |     19801/79203    |       4      |          39.09         |       61.67       |
+|             true_false            |     19801/79203    |       9      |          43.19         |       61.46       |
 |           scoring_system          |     19801/79203    |       4      |          46.85         |       53.59       |
 |special_instructions_data_scientist|     19801/79203    |       3      |          43.45         |       51.42       |
 |          self_reflection          |     19801/79203    |       3      |          40.02         |       50.84       |
@@ -20,6 +22,31 @@ model: claude sonnet 3.7
 |        constraints_no_loops       |     19801/79203    |       5      |          36.44         |        42.9       |
 |          chain_of_thought         |     19801/79203    |       2      |          31.8          |       38.47       |
 |             same_chat             |     19801/79203    |       3      |          26.38         |       27.07       |
+
+
+model: gemini2.5-flash
+
+|               Method              | Train/Test Samples | Train Rounds | Average Train Accuracy | Test Set Accuracy |
+|-----------------------------------|--------------------|--------------|------------------------|-------------------|
+| special_instructions_no_words_len |     19801/79203    |       7      |          12.61         |       25.69       |
+|             true_false            |     19801/79203    |      10      |          7.47          |       20.76       |
+
+---
+
+
+|               Method              |       Model       | Train/Test Samples | Train Rounds | Average Test Accuracy | Best Test Set Accuracy |
+|-----------------------------------|-------------------|--------------------|--------------|-----------------------|------------------------|
+|             lightgbm              |  gemini2.5-flash  |     19801/79203    |       3      |          85.06        |         85.65          |
+|             lightgbm              | claude_sonnet-3.7 |     19801/79203    |       6      |          84.53        |         85.33          |
+|           neural network          | claude_sonnet-3.7 |     19801/79203    |       5      |          80.59        |         86.06          |
+|           neural network          |  gemini2.5-flash  |     19801/79203    |       4      |          73.87        |         87.46          |
+|            word_vectors           | claude_sonnet-3.7 |     19801/79203    |       4      |          59.19        |         73.92          |
+|            word_vectors           |  gemini2.5-flash  |     19801/79203    |       3      |          45.65        |         45.65          |
+
+- gemini2.5-flash tends to create similar codes even if we give more examples in the prompt or tell "improve this code".
+- At the last step of every method, I tried saying "Improve this code to make the model perform better" on the best code the LLM created in the previous steps, and it mostly helped.
+- In gemini2.5-flash's lightgbm method, it created the same code in two passes and when I asked to make the code better, it created a logic for grid search, which gave a better accuracy but a bit slower since it's tuning the parameters.
+- In word_vectors, there was no change in gemini2.5-flash even though I told it to improve the code.
 
 
 - [x] Chain of thought prompting:
