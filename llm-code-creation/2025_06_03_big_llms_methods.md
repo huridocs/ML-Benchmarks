@@ -24,6 +24,7 @@ model: claude sonnet 3.7
 |             same_chat             |     19801/79203    |       3      |          26.38         |       27.07       |
 
 
+dataset: upr_action (5 labels, single label classification)
 model: gemini2.5-flash
 
 |               Method              | Train/Test Samples | Train Rounds | Average Train Accuracy | Test Set Accuracy |
@@ -32,11 +33,13 @@ model: gemini2.5-flash
 |             true_false            |     19801/79203    |      10      |          7.47          |       20.76       |
 
 ---
+---
 
+dataset: upr_action (5 labels, single label classification)
 
 |               Method              |       Model       | Train/Test Samples | Train Rounds | Average Test Accuracy | Best Test Set Accuracy | Average Time Train+Test (s)
 |-----------------------------------|-------------------|--------------------|--------------|-----------------------|------------------------|----------------------------|
-|               setfit              |      (no llm)     |     19801/79203    |       -      |          89.54        |         89.54          |          450               |
+|       TextSingleLabelSetFit       |      (no llm)     |     19801/79203    |       -      |          89.54        |         89.54          |          450               |
 |     pretrained_transformers       |  gemini2.5-flash  |     19801/79203    |       4      |          89.53        |         89.76          |          1150.19           |
 |             nn_bilstm             |  gemini2.5-flash  |     19801/79203    |       4      |          87.39        |         88.25          |          1229.37           |
 |     nn_hierarchical_attention     |  gemini2.5-flash  |     19801/79203    |       3      |          85.66        |         87.75          |          3052.18           |
@@ -56,7 +59,6 @@ model: gemini2.5-flash
 |         latest_best_model         | claude_sonnet-3.7 |     19801/79203    |       1*     |          17.43        |         17.43          |          12499             |
 
 
-
 - None of these methods performed better than the setfit method we already have.
 - gemini2.5-flash tends to create similar codes even if we give more examples in the prompt or tell "improve this code".
 - At the last step of every method, I tried saying "Improve this code to make the model perform better" on the best code the LLM created in the previous steps, and it mostly helped.
@@ -65,6 +67,47 @@ model: gemini2.5-flash
 - In "latest_best_model" method, what I have done is I asked model to "check for the best existing model for this task and use it". But sonnet-3.7 somehow decided to use SVM. gemini2.5-flash on the other hand, decided to use "bert-base-uncased", which I already tried in "pretrained_methods", so I didn't try it again.
 - In gemini2.5-flash's lightgbm method, it created the same code in two passes and when I asked to make the code better, it created a logic for grid search, which gave a better accuracy but a bit slower since it's tuning the parameters.
 - In word_vectors, there was no change in gemini2.5-flash even though I told it to improve the code.
+
+---
+---
+
+dataset: plan_topics (16 labels, multi label classification)
+
+|          Method                 |      Model      | Train/Test Samples  | Train Rounds | Average F1 Score [micro] | Average F1 Score [macro] | Average F1 Score [weighted] | Best F1 Score [micro] | Average Time (s)
+|---------------------------------|-----------------|---------------------|--------------|--------------------------|--------------------------|-----------------------------|-----------------------|-----------------|
+|     pretrained_transformers     | gemini2.5-flash |     43281/173124    |       3      |           90.74          |           86.15          |            90.61            |         90.83         |     4539.99     |
+| pretrained_transformers_thinking| gemini2.5-flash |     43281/173124    |       2      |           90.62          |           87.2           |            90.54            |         91.09         |      2407       |
+|        nn_bilstm                | gemini2.5-flash |     43281/173124    |       3      |           85.9           |           79.13          |            85.58            |         86.46         |     1325.63     |
+|   nn_hierarchical_attention     | gemini2.5-flash |     43281/173124    |       3      |           85.2           |           77.04          |            84.78            |         86.25         |     1671.7      |
+|            lightgbm             | gemini2.5-flash |     43281/173124    |       3      |           83.86          |           72.11          |            82.82            |         83.86         |     2071.92     |
+|     TextSetFitMultilingual      |     (no llm)    |     43281/173124    |       -      |           78.6           |           60.74          |            76.07            |         78.60         |     746.72      |
+|      TextBalancedSetFit         |     (no llm)    |     43281/173124    |       -      |           76.92          |           67.12          |            76.01            |         76.92         |     359.89      |
+|          nn_attention           | gemini2.5-flash |     43281/173124    |       3      |           68.57          |           29.45          |            57.53            |         84.61         |     361.88      |
+|     TextSingleLabelSetFit       |     (no llm)    |     43281/173124    |       -      |           64.79          |           37.51          |            59.95            |         64.79         |     500.43      |
+
+
+---
+---
+
+dataset: upr_issues (69 labels, multi label classification)
+
+|             Method             |      Model      | Train/Test Samples | Train Rounds | Average F1 Score [micro] | Average F1 Score [macro] | Average F1 Score [weighted] | Best F1 Score [micro] | Average Time (s) 
+|--------------------------------|-----------------|--------------------|--------------|--------------------------|--------------------------|-----------------------------|-----------------------|-----------------|
+|     pretrained_transformers    | gemini2.5-flash |     19762/79046    |       3      |           87.72          |           61.03          |            85.75            |         88.11         |     908.71      |
+|            lightgbm            | gemini2.5-flash |     19762/79046    |       2      |           85.41          |           64.12          |            84.19            |         85.52         |     5146.03     |
+|pretrained_transformers_thinking| gemini2.5-flash |     19762/79046    |       3      |           84.94          |           49.27          |            80.85            |         88.45         |      647.2      |
+|          nn_attention          | gemini2.5-flash |     19762/79046    |       2      |           84.05          |           62.12          |            83.21            |         84.41         |     5767.02     |
+|      TextSetFitMultilingual    |     (no llm)    |     19762/79046    |       -      |           80.99          |           57.05          |            78.63            |         80.99         |     734.52      |
+|        TextBalancedSetFit      |     (no llm)    |     19762/79046    |       -      |           80.22          |           64.24          |            79.94            |         80.22         |     442.82      |
+|    nn_hierarchical_attention   | gemini2.5-flash |     19762/79046    |       3      |           76.01          |           46.35          |             72.0            |         84.47         |     116.57      |
+|            nn_bilstm           | gemini2.5-flash |     19762/79046    |       3      |           70.58          |           44.7           |            73.49            |         85.19         |     169.78      |
+|     TextSingleLabelSetFit      |     (no llm)    |     19762/79046    |       -      |           58.60          |           46.54          |            56.06            |         58.60         |     411.35      |
+
+
+- As the code becomes more complex, the models tend to create errors in these codes. And it helps a lot if we give some error examples in the prompt and tell the model to avoid them.
+- If the models create errors in the code even in the prompt we tell them, if we resend the code and say "From this code, I'm getting this error, fix it" they mostly fix that problem.
+- But sometimes the error is not solved and if we get the same error 3-4 times consecutively, most of the time this means it's not going to be solved.
+- Activating the models' thinking capability did not help, but it's also not worse. But it can help to detect the errors in the code better.
 
 
 - [x] Chain of thought prompting:
@@ -122,3 +165,5 @@ model: gemini2.5-flash
     - [x] Pretrained Transformers
     - [x] Latest best model
 - [x] XGBoost
+
+- [x] Multilabel Tasks
