@@ -360,7 +360,7 @@ From all the models I have tested, `bytedance-seed-x-ppo-7b-gptq-int8` is the on
 
 If we want some general purpose model, `gpt-oss` can be a way to go. It also has decent scores on translation task but there are better models.
 
-If we need to translate some underrepresented languages, we can go with `nllb-200-3.3B`. Their author, `facebook` claimed that it supports 200 languages and it has decent scores on the data we have.
+If we need to translate some underrepresented languages, we can go with `nllb-200-3.3B`. It's author, `facebook` claimed that it supports 200 languages and it has decent scores on the data we have.
 
 Trying different methods like `page-to-page` or `previous-after-segments` did not affect the results much. So we can maybe continue with just `segment-to-segment` approach. Since it's easier to control and it's easier for models to translate little parts, without losing anything in the translation. But of course, we can try to think new ways about it and also if we decide to switch to a new model, I can try these different methods on that model to see how does it perform.
 
