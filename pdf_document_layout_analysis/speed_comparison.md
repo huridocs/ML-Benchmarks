@@ -1,6 +1,9 @@
 | Model    | GPU | Hardware          | Speed (s/page) |
 |----------|:---:|:------------------|---------------:|
 | LightGBM |  ✗  | Intel i7-14700K   |           0.04 |
+| yolov10m |  ✓  | RTX 4070 TI Super |           0.013|
+| yolov10b |  ✓  | RTX 4070 TI Super |           0.021|
+| yolov8x  |  ✓  | RTX 4070 TI Super |           0.023|
 | deepdoc  |  ✗  | Intel i7-14700K   |           0.34 |
 | VGT      |  ✓  | RTX 4070 TI Super |           0.34 |
 | docling  |  ✓  | RTX 4070 TI Super |           0.39 |
