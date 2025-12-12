@@ -322,7 +322,7 @@ Results below threshold: 5111
   - True Negatives (does NOT contain 'article'): 4469
   - False Negatives (contains 'article'): 642
 
-Accuracy: 0.8047
-Precision: 0.2484
-Recall: 0.1985
-F1 Score: 0.2207
+Accuracy: 80.47%
+Precision: 24.84%
+Recall: 19.85%
+F1 Score: 22.07%

@@ -10,10 +10,10 @@ Results below threshold: 430
   - True Negatives (does NOT contain 'article'): 160
   - False Negatives (contains 'article'): 270
 
-Accuracy: 0.3905
-Precision: 1.0000
-Recall: 0.0459
-F1 Score: 0.0878
+Accuracy: 39.05%
+Precision: 100.00%
+Recall: 4.59%
+F1 Score: 8.78%
 
 
 #### By 5 grams
@@ -26,10 +26,10 @@ Results below threshold: 37134
   - True Negatives (does NOT contain 'article'): 37113
   - False Negatives (contains 'article'): 21
 
-Accuracy: 0.6078
-Precision: 0.0520
-Recall: 0.9848
-F1 Score: 0.0988
+Accuracy: 60.78%
+Precision: 5.20%
+Recall: 98.48%
+F1 Score: 9.88%
 
 
 #### By 5 grams (with average embeddings for Article 1, .. , Article 23
@@ -42,10 +42,10 @@ Results below threshold: 29185
   - True Negatives (does NOT contain 'article'): 29174
   - False Negatives (contains 'article'): 11
 
-Accuracy: 0.4825
-Precision: 0.0402
-Recall: 0.9920
-F1 Score: 0.0772
+Accuracy: 48.25%
+Precision: 4.02%
+Recall: 99.20%
+F1 Score: 7.72%
 
 ##### By segments
 
@@ -57,10 +57,10 @@ Results below threshold: 4468
   - True Negatives (does NOT contain 'article'): 3954
   - False Negatives (contains 'article'): 514
 
-Accuracy: 0.7374
-Precision: 0.2237
-Recall: 0.3583
-F1 Score: 0.2754
+Accuracy: 73.74%
+Precision: 22.37%
+Recall: 35.83%
+F1 Score: 27.54%
 
 ### With text "article"
 
@@ -74,7 +74,7 @@ Results below threshold: 5416
   - True Negatives (does NOT contain 'article'): 4618
   - False Negatives (contains 'article'): 798
 
-Accuracy: 0.8035
-Precision: 0.0090
-Recall: 0.0037
-F1 Score: 0.0053
+Accuracy: 80.35%
+Precision: 0.90%
+Recall: 0.37%
+F1 Score: 0.53%
