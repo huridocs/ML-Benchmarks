@@ -138,35 +138,3 @@ A "Court" is a reference to a specific judicial body, tribunal, bench, or legal 
 | llama3.2:3b | 100 | 5827 | 0.9511 | 0.6118 | 0.5518 | 0.5803 | 58.15 | 0.58 |
 
 
-
-
-## Test 4: `Provision` + `Indian Legal NER`
-
-* Dataset: https://huggingface.co/datasets/hf-tuner/indian-legal-ner
- * Category: Provision
- * Provision text ratio: 0.8
- * Texts count: 100
- * Prompt:
-
-
-```python
-        prompt = f"""### ROLE
-You are a Legal Document Analyst.
-
-### TASK
-Rewrite the provided text, wrapping every "Provision Reference" in <provision> tags. Do not change any other text.
-
-### DEFINITION
-A "provision coreference" is a textual reference to a specific legal division, such as a section, sub-section, clause, article, or rule.
-
-### EXAMPLE
-* Example Input: "We cite Article 12 and Section 4."
-* Example Output: "We cite <provision>Article 12</provision> and <provision>Section 4</provision>."
-
-### TEXT
-{text}
-
-### FINAL RESPONSE
-"""
-```
-
